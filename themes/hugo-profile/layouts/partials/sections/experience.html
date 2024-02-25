@@ -1,130 +1,220 @@
 {{ if .Site.Params.experience.enable | default false }}
 <section id="experience" class="py-5">
-    <div class="container">
-        <h3 class="text-center">{{ .Site.Params.experience.title | default "Experience" }}</h3>
-        <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-8 col-lg-8 py-5">
-                <div class="experience-container px-3 pt-2">
-                    <ul class="nav nav-pills mb-3 bg-transparent primary-font" id="pills-tab" role="tablist">
-                        {{ range $index, $element := .Site.Params.experience.items }}
-                        {{ if (eq $index 0) }}
-                        <li class="nav-item px-1 bg-transparent" role="presentation">
-                            <div 
-                                class="nav-link active bg-transparent" 
-                                aria-selected="true" 
-                                role="tab" 
-                                data-bs-toggle="pill"
-                                id='{{ replace .company " " "-" }}-{{ replace .date " " "-" }}-tab'
-                                data-bs-target='#pills-{{ replace .company " " "-" }}-{{ replace .date " " "-" }}'
-                                aria-controls='{{ replace .company " " "-" }}-{{ replace .date " " "-" }}' 
-                            >
-                                {{ .company }}
-                            </div>
-                        </li>
-                        {{ else }}
-                        <li class="nav-item px-1 bg-transparent" role="presentation">
-                            <div 
-                                class="nav-link bg-transparent" 
-                                aria-selected="true" 
-                                role="tab" 
-                                data-bs-toggle="pill"
-                                id='{{ replace .company " " "-" }}-{{ replace .date " " "-" }}-tab'
-                                data-bs-target='#pills-{{ replace .company " " "-" }}-{{ replace .date " " "-" }}' 
-                                aria-controls='{{ replace .company " " "-" }}-{{ replace .date " " "-" }}'
-                            >
-                                {{ .company }}
-                            </div>
-                        </li>
-                        {{ end }}
-                        {{ end }}
-                    </ul>
-                    <div class="tab-content pb-5 pt-2 bg-transparent primary-font" id="pills-tabContent">
-                        {{ range $index, $element := .Site.Params.experience.items }}
-                        {{ if (eq $index 0) }}
-                        <div 
-                            class="tab-pane fade show active bg-transparent" 
-                            role="tabpanel"
-                            id='pills-{{ replace .company " " "-" }}-{{ replace .date " " "-" }}'
-                            aria-labelledby='pills-{{ replace .company " " "-" }}-{{ replace .date " " "-" }}-tab'
-                        >
-                            <div>
-                                <span class="h4">{{ .job }}</span>
-                                <small>-</small>
-                                <a href="{{ .companyUrl }}" target="_blank">{{ .company }}</a>
-                                <div class="pb-1">
-                                    <small>{{ .date }}</small>
-                                    {{ if .info.enable | default true }}
-                                    <span class="p-2">
-                                        <span 
-                                            style="cursor: pointer;" 
-                                            data-bs-toggle="tooltip" 
-                                            data-bs-placement="top" 
-                                            data-bs-original-title={{ .info.content | default (print "Working as a " .job " at " .company ) }}
-                                        >
-                                            <i class="fas fa-info-circle fa-xs"></i>
-                                        </span>
-                                    </span>
-                                    {{ end }}
-                                </div>
-
-                                {{ if .featuredLink.enable | default false }}
-                                <div class="py-2 featuredLink">
-                                    <a class="p-2 px-4 btn btn-outline-primary btn-sm" href={{ .featuredLink.url | default "#" }} target="_blank">
-                                        {{ .featuredLink.name | default "Featured Link" }} 
-                                    </a>
-                                </div>
-                                {{ end }}
-                            </div>
-
-                            {{ .content | markdownify}}
-                        </div>
-                        {{ else }}
-                        <div 
-                            class="tab-pane fade bg-transparent" 
-                            role="tabpanel"
-                            id='pills-{{ replace .company " " "-" }}-{{ replace .date " " "-" }}'
-                            aria-labelledby='pills-{{ replace .company " " "-" }}-{{ replace .date " " "-" }}-tab'
-                        >
-                            <div>
-                                <span class="h4">{{ .job }}</span>
-                                <small>-</small>
-                                <a href="{{ .companyUrl }}" target="_blank">{{ .company }}</a>
-                                
-                                <div class="pb-1">
-                                    <small>{{ .date }}</small>
-                                    {{ if .info.enable | default true }}
-                                    <span class="p-2">
-                                        <span 
-                                            style="cursor: pointer;" 
-                                            data-bs-toggle="tooltip" 
-                                            data-bs-placement="top" 
-                                            data-bs-original-title={{ .info.content | default (print "Worked as a " .job " at " .company ) }}
-                                        > 
-                                            <i class="fas fa-info-circle fa-xs"></i>
-                                        </span>
-                                    </span>
-                                    {{ end }}
-                                </div>
-                                
-                                {{ if .featuredLink.enable | default false }}
-                                <div class="py-2 featuredLink">
-                                    <a class="p-2 px-4 btn btn-outline-primary btn-sm" href={{ .featuredLink.url | default "#" }} target="_blank">
-                                        {{ .featuredLink.name | default "Featured Link" }} 
-                                    </a>
-                                </div>
-                                {{ end }}
-                            </div>
-
-                            <div class="pt-2">
-                                {{ .content | markdownify}}
-                            </div>
-                        </div>
-                        {{ end }}
-                        {{ end }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
 {{ end }}
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> 
+
+<style>
+#experience {
+    background-color: #ffffff; 
+    font-family: 'Roboto'; /* Apply Roboto */
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.timer-section {
+  min-height: 100vh;
+}
+.timer-section .container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.timer-section .timer-container {
+  list-style: none;
+}
+.timer-section .timer {
+  list-style: none;
+  position: relative;
+  max-width: 750px;
+  margin: auto;
+}
+.timer-section .timer::before {
+  /* content: ''; */
+  position: absolute;
+  height: 100%;
+  width: 2px;
+  background-color: #F2F2F2;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.timer-section .timer .step {
+  width: 50%;
+  padding: 20px 15px;
+  position: relative;
+  background-color: #F2F2F2;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, .04);
+}
+.timer-section .timer .step:not(:first-child),
+.timer-section .timer .step:not(:last-child) {
+  margin: 90px 0 60px 0;
+}
+.timer-section .timer .step:nth-child(odd) {
+  transform: translateX(100%);
+  border-left: 2px solid rgb(0, 0, 0);
+  border-radius: 0 3px 3px 0;
+}
+.timer-section .timer .step:nth-child(even) {
+  border-right: 2px solid rgb(0, 0, 0);
+  border-radius: 3px 0 0 3px;
+}
+
+.timer-section .timer .step > span {
+  position: absolute;
+  height: 26px;
+  width: 25px;
+  color: #333;
+  background-color: #F2F2F2;
+  text-align: center;
+  line-height: 22px;
+  border-radius: 3px;
+  font-size: .8rem;
+}
+.timer-section .timer .step:nth-child(odd) > span {
+  top: -40px;
+  left: -13px;
+  border: 2px solid rgb(0, 0, 0);
+}
+.timer-section .timer .step:nth-child(even) > span {
+  top: -40px;
+  right: -13px;
+  border: 2px solid rgb(0, 0, 0);
+}
+
+.timer-section .timer .step h3 {
+  margin-bottom: 15px;
+}
+.timer-section .timer .step p {
+  font-weight: 300;
+  font-size: .85rem;
+  color: #555;
+}
+
+@media screen and (max-width: 500px) {
+  .timer-section .timer .step {
+    width: 100%;
+    text-align: center;
+    transform: translateX(0%);
+    border-radius: 3px !important;
+  }
+  .timer-section .timer .step:nth-child(odd) {
+    transform: translateX(0%);
+    border: none;
+    border-top: 2px solid rgb(0, 0, 0);
+  }
+  .timer-section .timer .step:nth-child(even) {
+    border: none;
+    border-top: 2px solid rgb(0, 0, 0);
+  }
+  .timer-section .timer .step span {
+    left: 50% !important;
+    transform: translateX(-50%);
+  }
+}
+
+.timer-section .buttons {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .timer-section .buttons a {
+      display: inline-block;
+      margin: 0 10px;
+      padding: 10px 20px;
+      text-decoration: none;
+      background-color: #3498db;
+      color: #fff;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    .timer-section .buttons a:hover {
+      background-color: #297fb8;
+    }
+</style>
+
+<section id="experience" class="py-5">
+    <h3 class="text-center">{{ .Site.Params.experience.title | default "Experience" }}<br><br></h3>
+    
+    <section class="timer-section">
+      <div class="container">
+        <div class="timer-container">
+          <ul class="timer">
+            <li class="step">
+              <span></span>
+              <div class="content">
+                <h4>Teaching Assistant</h4><p>Course: <a href="https://bloomington.iu.edu/index.html">Principles of Machine Learning</p><h6><a href="https://academics.iu.edu/courses/bloomington/csci-b-455-principles-of-machine-learning.html">Indiana University Bloomington</a></h6>
+            <span>January, 2024 - May, 2024<br><br></span>
+            <p>• Supported Professor in teaching key machine learning concepts including supervised and unsupervised learning, regression, classification, clustering, neural networks, and model evaluation. <br><br>
+                • Assisted around 90 students with assignments and projects focused on implementing machine learning algorithms in Python, reinforcing theoretical course material.</p>
+              </div>
+            </li>
+          <li class="step">
+            <span></span>
+            <div class="content">
+              <h4>Data Scientist</h4> <h6><a href="https://www.omdena.com/chapter-challenges/equijob-using-ai-to-balance-bias-in-job-descriptions">Omdena</a></h6>
+          <span>September, 2023 - October, 2023<br><br></span>
+          <p>• Performed data collection by crawling 25,000+ job descriptions from diverse industries and regions to create a robust dataset for training machine learning models to detect gender and racial bias.<br><br>
+            • Developed LSTM, BERT, DistilBERT, and RoBERTa models and evaluated their performance in accurately classifying biased versus neutral language in job postings. </p>
+            </div>
+            <div class="buttons">
+              <a href="https://omdena-equijob.netlify.app/" target="_blank">Live Website</a>
+              <a href="https://github.com/KrishnaTejaJ/Equi-Job-Omdena-Project" class="github-logo" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+          </li>
+          <li class="step">
+            <span></span>
+            <div class="content">
+              <h4>Research Assistant</h4> <h6><a href="https://bradrfulton.com/collaborators/ras/">Indiana University Bloomington</a></h6>
+        <span>January, 2023 - May, 2023<br><br></span>
+        <p>• Developed interactive Tableau dashboards for Grants Map, facilitating detailed exploration of foundation funding, and created activity area-based visualizations for insights on top foundations and donation patterns.<br><br>
+            • Contributed to network analysis by identifying anomalies, creating Jupyter Notebooks for consistent analysis, and summarizing relevant network econometrics papers for future research.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span></span>
+            <div class="content">
+              <h4>Software Developer</h4> <h6><a href="https://www.tcs.com/">Tata Consultancy Services, India</a></h6>
+        <span>July, 2021 - July, 2022<br><br></span>
+        <p>Programmed an internal web application for a healthcare client using Springboot. Explored and implemented various attributes
+            and data preparedness strategies crucial for Mainframe to Cloud migration.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span></span>
+            <div class="content">
+              <h4>Data Science Intern</h4> <h6><a href="https://www.cluzters.ai/">Cluzters.ai, India</a></h6>
+        <span>November, 2020 - March, 2021<br><br></span>
+        <p>• Achieved exposure towards recommendation systems by applying appropriate custom-designed filtering models based on
+            content-based, collaborative, and knowledge-based recommendation techniques.<br><br>
+            • Conducted in-depth Data Science research and generated insightful content for cluzters.ai, gaining profound insights into the
+            operations of a community-driven platform.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span></span>
+            <div class="content">
+              <h4>Data Science Intern</h4> <h6><a href="https://www.bennett.edu.in/">Bennett University, India</a></h6>
+              <span>May, 2019 - June, 2019<br><br></span>
+              <p>• Worked on a 25,331 image dataset, and utilised keras data augmentation techniques to address a set of 8 imbalanced classes.<br><br>
+                  • Conducted experiments with 5 machine learning models, by hyper-parameter tuning utilizing NVIDIA DGX.<br><br>
+                  • Published a research paper: <a href="https://www.jetir.org/papers/JETIR1906E58.pdf">”Skin lesion analysis towards melanoma detection with deep neural networks.”</a></p>
+            </div>
+          </li>
+          </ul>
+        </div>
+      </div>
+    </section>   
+</section>

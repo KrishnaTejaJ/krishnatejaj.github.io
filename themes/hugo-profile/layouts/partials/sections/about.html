@@ -1,3 +1,6 @@
+
+
+
 {{ if .Site.Params.about.enable | default false }}
 <section id="about" class="py-0 py-sm-5">
     <div class="container bg-transparent">
@@ -10,18 +13,22 @@
                 </div>
             </div>
             {{ end }}
-            <div class="col-sm-12 col-md-12 col-lg-8 content">
+            <div class="col-sm-12 col-md-12 col-lg-8 content text-center">
                 {{ .Site.Params.about.content | markdownify }}
-
+            
                 {{ if .Site.Params.about.skills.enable }}
-                {{ .Site.Params.about.skills.title }}
-                <ul>
-                    {{ range .Site.Params.about.skills.items }}
-                    <li>{{ . | markdownify }}</li>
-                    {{ end }}
-                </ul>
+                <div>
+                    <p>{{ .Site.Params.about.skills.title }}</p>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: inline-block; text-align: left;"> <!-- Added text-align: left -->
+                        {{ range .Site.Params.about.skills.items }}
+                        <li>{{ . | markdownify }}</li>
+                        {{ end }}
+                    </ul>
+                </div>
                 {{ end }}
             </div>
+            
+            
         </div>
     </div>
 </section>
