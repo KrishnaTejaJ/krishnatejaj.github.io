@@ -18,7 +18,7 @@
     }
 </script>
 
-<!-- Show header on scroll up -->
+<!-- Show header on scroll up only
 {{ if .Site.Params.navbar.stickyNavBar.enable | default false }}
 {{ $showNavBarOnScrollUp := .Site.Params.navbar.stickyNavBar.showOnScrollUp | default false }}
 <script>
@@ -43,7 +43,20 @@
         prevScrollPos = currentScrollPos;        
     });
 </script>
+{{ end }}-->
+
+<!-- Show header on scroll up and down -->
+{{ if .Site.Params.navbar.stickyNavBar.enable | default false }}
+  <script>
+    var prevScrollPos = window.pageYOffset;
+    window.addEventListener("scroll", function showHeaderOnScroll() {
+        let profileHeaderElem = document.getElementById("profileHeader");
+        profileHeaderElem.classList.add("showHeaderOnTop");
+        prevScrollPos = window.pageYOffset;        
+    });
+  </script>
 {{ end }}
+
 
 <!-- Navbar -->
 <header id="profileHeader">
@@ -80,6 +93,7 @@
             <!-- navbar content -->
             <div class="collapse navbar-collapse text-wrap primary-font" id="navbarContent">
                 <ul class="navbar-nav {{ .Site.Params.navbar.align | default "ms-auto"}} text-center">
+                    <!-- remove comments to enable search
                     {{ if not (.Site.Params.navbar.disableSearch | default false) }}
                         <li class="nav-item navbar-text d-block d-md-none">
                             <div class="nav-link">
@@ -87,6 +101,7 @@
                             </div>
                         </li>
                     {{ end }}
+                    -->
 
                     {{ if and (.Site.Params.about.enable | default false) (not (.Site.Params.navbar.menus.disableAbout | default false)) }}
                     <li class="nav-item navbar-text">
@@ -170,9 +185,10 @@
                     {{end}}
                     {{end}}
 
+                    <!--
                     {{ if (not .Site.Params.theme.disableThemeToggle | default false) }}
                     <li class="nav-item navbar-text">
-                        <!-- darkmode mode toggle -->
+                        !-- darkmode mode toggle -- NOTE: add comments to this line to enable darkmode mode toggle
                         <div class="text-center">
                             <button id="theme-toggle">
                                 <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -193,7 +209,7 @@
                         </div>
                     </li>
                     {{ end }}
-
+                        -->
                 </ul>
 
             </div>
